@@ -1,6 +1,6 @@
 haveParameters() {
 
-# Число параметров равно 1
+# Число параметров равно 6
 if [[ $1 -ne 6 ]]; then
 	if [[ $1 -eq 0 ]]; then
                 echo "Parameters not found"
@@ -31,30 +31,33 @@ fi
 checkIsNumber(){
 
 if [[ ! $1 =~ ^[0-9]+$ ]]; then
-	echo "Wrong path format"
+	echo "Wrong count files/folders"
 	exit 1
 fi
 }
 
 #Проверка параметра 3
-check_folder_char() {
-if [[! $1 =~ ^[a-zA-z]{1,7}$ ]]
+checkFolderChar() {
+
+if [[ ! $1 =~ ^[a-zA-Z]{1,7}$ ]]; then
 	echo "Wrong characters for folders"
 	exit 1
 fi
 }
 
 #Проверка параметра 5
-check_file_char() {
-if [[! $1 =~ ^[a-zA-z]{1,7}.[a-zA-Z]{1,3}$ ]]
+checkFileChar() {
+
+if [[ ! $1 =~ ^[a-zA-Z]{1,7}.[a-zA-Z]{1,3}$ ]]; then
 	echo "Wrong characters for files"
 	exit 1
 fi
 }
 
 #Проерка парамтра 6
-check_file_size() {
-if [[! $1 =~ ^[1-9]?[0-9]?[0]?kb$ ]]
+checkFileSize() {
+
+if [[ ! $1 =~ ^[1-9]?[0-9]?[0]?kb$ ]]; then
 	echo "Wrong size file"
 	exit 1
 fi	
