@@ -17,17 +17,10 @@ fi
 }
 
 getDate() {
-
-flags=""
-
-if [[ $1 == ${typeArray[0]} ]]; then
-	flags="-d --full-time"; else
-	flags="--full-time"
-fi
-
-date=$(ls "$flags" "$1" | awk '{print $6" "$7}')
-
-return $date
+    local path="$1"
+    local type="$2"
+    date=$(stat -c "%y" "$path" | awk '{print $1, $2}')
+    echo "${date%.*}"
 }
 
 createName() {
@@ -53,28 +46,29 @@ createName() {
 }
 
 createFiles() {
-path=$1
+local path=$1
+local basePath=$(echo $1 | awk -F"/" '{print $1}')
+local basePath="$basePath/"
 
-basePath=$(echo "$1" | awk -F"/" '{print $1}')
+local countFiles=$2
 
-countFiles=$2
+local fileSizeKb=$4
 
-fileSize=$(echo "$4" | awk -F"[a-z]" '{print $1}')
-fileSize=$(($fileSize * 1024))
+local fileSize=$(echo "$4" | awk -F"[a-z]" '{print $1}')
+local fileSize=$(($fileSize * 1024))
 
-fileName=$(echo $3 | awk -F"." '{printf $1}')
-fileExtension=$(echo $3 | awk -F"." '{printf $2}')
+local fileName=$(echo $3 | awk -F"." '{printf $1}')
+local fileExtension=$(echo $3 | awk -F"." '{printf $2}')
 
 for ((i=0; i<$countFiles; i++)); do
 	name=$(createName "$i" "$fileName")
 	dateFormat=$(date +"%d%m%y")
-	name="$path$name.$fileExtension_$dateFormat"
-	
+	name="$path/${name}_$dateFormat.$fileExtension"
 	$(touch $name)
 	$(truncate -s +"$fileSize" "$name")
 
-	date=getDate "$name" "${typeArray[1]}"
-	recordToLog "$path" "$name" "$date" "$fileSize"
+	date=$(getDate "$name" "${typeArray[1]}")
+	recordToLog "$basePath" "$name" "$date" "$fileSizeKb"
 	checkFreeSpace
 	
 done
@@ -95,16 +89,17 @@ arrayFolderCharacter="$3"
 arrayFileCharacter="$5"
 fileSize="$6"
 
-for ((i=0; i<$countFiles; i++)); do
-	name=$(createName "$i" "$arrayFolderCharacter")
+for ((k=0; k<$countFolders; k++)); do
+	name=$(createName "$k" "$arrayFolderCharacter")
 	dateFormat=$(date +"%d%m%y")
-	name="$path$name_$dateFormat"
+	name="$path${name}_$dateFormat"
 	$(mkdir "$name")
-	date=getDate "$name" "${typeArray[0]}"
-	recordToLog "$path" "$name" "$date"
+		
+	dateFolder=$(getDate "$name" "${typeArray[1]}")	
+	recordToLog "$path" "$name" "$dateFolder"
 	checkFreeSpace
 	
-	createFiles "$path" "$countFiles" "$arrayFileCharacter" "$fileSize"
+	createFiles "$name" "$countFiles" "$arrayFileCharacter" "$fileSize"
 	
 	path=$1
  done

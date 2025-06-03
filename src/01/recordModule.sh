@@ -1,14 +1,12 @@
 recordToLog() {
+    local recordFileName="$1record.log"
+    local name="$2"
+    local dateCreate="$3"
+    local size="$4"
 
-path=$1
-fileName="record.log"
-fileName="$path$fileName"
+    # Определяем тип записи (папка/файл)
 
-name=$2
-dateCreate=$3
-size=$4
-
-$(echo $name $dateCreate $size)
-
-echo "$name $dateCreate $size" >> "$fileName"
+    # Форматируем вывод
+    printf "%-40s | %-19s | %-6s %s\n" \
+        "$name" "$dateCreate" "$size" >> "$recordFileName"
 }
