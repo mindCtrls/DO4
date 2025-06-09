@@ -22,6 +22,6 @@ printExecuteTime() {
   executionTime=$(($unixTimeEnd-$unixTimeStart))
 
   printf "%-40s\n %-40s\n %-40s\n" \
-      " Время начала:$startTime" "Время окончания работы:$endTime" "Время выполнения:$executionTime секунд"
+      " Время начала: $startTime" "Время окончания работы: $endTime" "Время выполнения: $executionTime секунд"
 
 }

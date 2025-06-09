@@ -56,7 +56,6 @@ createFiles() {
 	local fileSizeMb=$3
 
 	local fileSize=$(echo "$3" | awk -F"[a-zA-z]" '{print $1}')
-	local fileSize=$(($fileSize * 1024 * 1024))
 
 	local fileName=$(echo $2 | awk -F"." '{printf $1}')
 	local fileExtension=$(echo $2 | awk -F"." '{printf $2}')
@@ -65,8 +64,7 @@ createFiles() {
 		name=$(createName "$i" "$fileName")
 		dateFormat=$(date +"%d%m%y")
 		name="$path/${name}_$dateFormat.$fileExtension"
-		$(touch $name)
-		$(truncate -s +"$fileSize" "$name")
+		$(dd if=/dev/urandom of=$name bs=1M count="$fileSize" status=none)
 
 		date=$(getDate "$name" "${typeArray[1]}")
 		recordToLog "$name" "$date" "$fileSizeMb"

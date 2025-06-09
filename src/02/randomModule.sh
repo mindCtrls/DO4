@@ -1,16 +1,14 @@
  maxRand=32767
  minRand=0
 
-getCountFolders() {
-  local step=$(($maxRand/10)) # 100 это ограничение (кол-во промежутков)
-  local countFolders=$(($RANDOM/$step)) 
+getCountFolders() {  
+  local countFolders=$(($RANDOM%10)) 
   countFolders=$(($countFolders+1))
   echo "$countFolders"
 }
 
 getCountFiles() {
-  local step=$(($maxRand/5)) # 100 это ограничение (кол-во промежутков)
-  local countFiles=$(($RANDOM/$step)) 
+  local countFiles=$(($RANDOM%5)) 
   countFiles=$(($countFiles+1))
   echo "$countFiles"
 }
