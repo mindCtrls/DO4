@@ -1,13 +1,14 @@
 source ./checkParam.sh
 source ./createModule.sh
+source ./recordModule.sh
 
+scriptStartTime=$(date +"%Y-%m-%d %H:%M:%S")
 
 haveParameters "$#"
-isExistDirectory "$1"
-checkIsNumber "$2"
-checkFolderChar "$3"
-checkIsNumber "$4"
-checkFileChar "$5"
-checkFileSize "$6"
+checkFolderChar "$1"
+checkFileChar "$2"
+checkFileSize "$3"
 
-createFolders "$1" "$2" "$3" "$4" "$5" "$6"
+createFolders "$1" "$2" "$3"
+
+printExecuteTime "$scriptStartTime"

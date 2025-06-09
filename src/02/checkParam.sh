@@ -1,16 +1,16 @@
 haveParameters() {
 
 # Число параметров равно 6
-if [[ $1 -ne 6 ]]; then
-	if [[ $1 -eq 0 ]]; then
+if [[ $1 -ne 3 ]]; then
+        if [[ $1 -eq 0 ]]; then
                 echo "Parameters not found"
                 exit 1
         fi
-        if [[ $1 -gt 6 ]]; then
+        if [[ $1 -gt 3 ]]; then
                 echo "To many parameters"
                 exit 1
         fi
-        if [[ $1 -lt 6 ]]; then
+        if [[ $1 -lt 3 ]]; then
                 echo "To few parameters"
                 exit 1
         fi
@@ -57,7 +57,7 @@ fi
 #Проерка парамтра 6
 checkFileSize() {
 
-if [[ ! $1 =~ ^[1-9]?[0-9]?[0]?kb$ ]]; then
+if [[ ! $1 =~ ^[1-9]?[0-9]?[0]?Mb$ ]]; then
 	echo "Wrong size file"
 	exit 1
 fi	

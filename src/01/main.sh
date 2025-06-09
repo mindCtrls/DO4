@@ -1,7 +1,6 @@
 source ./checkParam.sh
 source ./createModule.sh
 
-
 haveParameters "$#"
 isExistDirectory "$1"
 checkIsNumber "$2"
