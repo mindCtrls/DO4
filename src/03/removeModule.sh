@@ -16,43 +16,30 @@ rmByLog() {
 }
 
 rmByDate() {
-	echo -e "Начало временного промежутка. Пример: \033[32m2025-06-09 11:49\033[0m"
+	echo -e "Начало временного промежутка. Пример: \033[32m2025-06-09 11:49:22\033[0m"
 	read -r dateStart
-	echo -e "Конец временного промежутка. Пример: \033[32m2025-06-09 11:55\033[0m"
+	echo -e "Конец временного промежутка. Пример: \033[32m2025-06-09 11:55:16\033[0m"
 	read -r dateEnd
 
 	# Тут добавить функци для проверки формата даты
 
-	dateStart="$dateStart:00"
-	dateEnd="$dateEnd:59"
-
 	echo "$dateStart"
-	echo "$dateEnd"
-	$(find / \( -name "bin" \
-							-o -name "bin64" \
-							-o -name "proc" \
-							-o -name "lib" \
-							-o -name "run" \
-							-o -name "var" \
-							-o -name "sys" \
-							-o -name "snap" \
-							-o -name "tmp" \
-							-o -name "root" \
-							-o -path "/etc/multipath" \) \
-									-prune -o -type d -newermt "$dateStart" ! -newermt "$dateEnd" -print -exec rm -rf {} +)\
-	$(find / \( -name "bin" \
-							-o -name "bin64" \
-							-o -name "proc" \
-							-o -name "lib" \
-							-o -name "run" \
-							-o -name "var" \
-							-o -name "sys" \
-							-o -name "snap" \
-							-o -name "tmp" \
-							-o -name "root" \
-							-o -path "/etc/multipath" \) \
-									-prune -o -type f -newecrt "$dateStart" ! -newecrt "$dateEnd" -print -exec rm -rf {} +)
-	
+	echo "$dateEnd"	
+
+    find / \( -name "bin" \
+              -o -name "bin64" \
+              -o -name "proc" \
+              -o -name "lib" \
+              -o -name "run" \
+              -o -name "var" \
+              -o -name "sys" \
+              -o -name "snap" \
+              -o -name "tmp" \
+              -o -name "root" \
+              -o -path "/etc/multipath" \) \
+          -prune -o \
+          -type d \( -newermt "$dateStart" ! -newermt "$dateEnd" \) -name "*_*" -exec rm -rf {} \;
+    
 }
 
 rmByMask() {
