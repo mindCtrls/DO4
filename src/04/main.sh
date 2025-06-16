@@ -27,16 +27,22 @@ getMethode() {
   echo "$methode"
 }
 
-getUrl() {
-  local url=${urlArr[$(getRandom "10")]}
+getRequest() {
+  local request=${requestArr[$(getRandom "10")]}
 
-  echo "$url"
+  echo "$request"
 }
 
 getAgent() {
   local agent=${agentArr[$(getRandom "8")]}
 
   echo "$agent"
+}
+
+getPageSize() {
+  local pageSize=${pageSizeArr[$(getRandom "10")]}
+
+  echo "$pageSize"
 }
 
 getDate() {
@@ -74,10 +80,12 @@ oneLogCreate() {
   local statusCode=$(getStatusCode)
   local methode=$(getMethode)
   local date=$(getDate "$1" "$2")
-  local url=$(getUrl)
+  local request=$(getRequest)
   local agent=$(getAgent)
+  local pageSize=$(getPageSize)
+  local url="best-site.com"  
 
-  echo "$ip $statusCode $methode $date $url $agent"
+  echo "$ip $statusCode $methode $date $request $agent $pageSize $url"
 }
 
 makeLogs() {
@@ -86,7 +94,7 @@ makeLogs() {
   for ((i=0; i<5; i++)) {
     local secIterator=$(getRandom "60")
     
-    for ((j=0; j<"$countIterates"; j++)) {
+    for ((j=0; j<"100"; j++)) {
       recordToLog "$i" "$(oneLogCreate "$i" "$secIterator")"
 
       local newValue=$(getRandom "60")

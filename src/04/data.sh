@@ -27,14 +27,26 @@
   codeArr[8]="502" # Сервер вернет такое, если используется в качестве шлюза. А целевой не смог обработать запрос
   codeArr[9]="503" # Сервер не готов обработать запрос в данный момент
 
-  declare -a urlArr
-  urlArr[0]="/"
-  urlArr[1]="/info"
-  urlArr[2]="/clients"
-  urlArr[3]="/clients/Europe"
-  urlArr[4]="/profile"
-  urlArr[5]="/offer"
-  urlArr[6]="/news"
-  urlArr[7]="/events"
-  urlArr[8]="/register"
-  urlArr[9]="/login"
+  declare -a requestArr
+  requestArr[0]="/"
+  requestArr[1]="/info"
+  requestArr[2]="/clients"
+  requestArr[3]="/clients/Europe"
+  requestArr[4]="/profile"
+  requestArr[5]="/offer"
+  requestArr[6]="/news"
+  requestArr[7]="/events"
+  requestArr[8]="/register"
+  requestArr[9]="/login"
+
+  declare -a pageSizeArr
+  pageSizeArr[0]="1234"
+  pageSizeArr[1]="441"
+  pageSizeArr[2]="4122"
+  pageSizeArr[3]="652"
+  pageSizeArr[4]="921"
+  pageSizeArr[5]="774"
+  pageSizeArr[6]="259"
+  pageSizeArr[7]="713"
+  pageSizeArr[8]="423"
+  pageSizeArr[9]="900"
