@@ -85,7 +85,7 @@ oneLogCreate() {
   local pageSize=$(getPageSize)
   local url="best-site.com"  
 
-  echo "$ip $statusCode $methode $date $request $agent $pageSize $url"
+  echo "$ip $statusCode $methode $date $request $pageSize $url $agent"
 }
 
 makeLogs() {
