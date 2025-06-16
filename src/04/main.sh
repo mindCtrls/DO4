@@ -15,26 +15,26 @@ getIp() {
 }
 
 getStatusCode() {
-  local code=${codeArr[$(getRandom "9")]}
+  local code=${codeArr[$(getRandom "10")]}
 
   echo "$code"
 }
 
 
 getMethode() {
-  local methode=${methodeArr[$(getRandom "4")]}
+  local methode=${methodeArr[$(getRandom "5")]}
 
   echo "$methode"
 }
 
 getUrl() {
-  local url=${urlArr[$(getRandom "9")]}
+  local url=${urlArr[$(getRandom "10")]}
 
   echo "$url"
 }
 
 getAgent() {
-  local agent=${agentArr[$(getRandom "7")]}
+  local agent=${agentArr[$(getRandom "8")]}
 
   echo "$agent"
 }

@@ -20,7 +20,6 @@ getRandom() {
     
   fi
   
-  value=$(( $value+1 ))
   echo "$value"
 
 }
