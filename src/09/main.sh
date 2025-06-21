@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./data.sh
+source /home/flox/DO4_LinuxMonitoring_v2.0.ID_356280-1/src/09/data.sh
 
 echo "$cpuUsage"
 
